@@ -2,7 +2,10 @@
     <div v-cloak>
         <div>
             apikey: {{ apikey }} <br>
-            stations: {{ stations }}
+            stations: {{ stations }}<br>
+            postalcode: {{ postalcode}} <br>
+            search: {{ search}}
+
         </div>
 
         <div class="tankerkoenig-info" v-if="!error">
