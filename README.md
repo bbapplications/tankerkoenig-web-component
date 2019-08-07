@@ -1,5 +1,18 @@
 # tk-web-component
 
+### Project preparation
+
+using vue cli > 3
+
+inital setup following this post on medium
+
+https://medium.com/@royprins/get-started-with-vue-web-components-593b3d5b3200
+```
+vue create tk-web-component
+npm install @vue/web-component-wrapper --save-dev
+
+```
+
 ## Project setup
 ```
 npm install
