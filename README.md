@@ -43,7 +43,28 @@ customers can overwerite these styles on their page i.e with a style tag in head
 </style>
 
 
+## How to use this component
 
+```html
+<script src="https://unpkg.com/vue"></script>
+<script src="./tk-web-component.min.js"></script>
+
+<style>
+    tk-web-component {
+      ...
+    }
+</style>
+
+```
+
+```html
+<tk-web-component
+        apikey="00000000-0000-0000-0000-000000000002"
+        stations="83d5ac80-4f23-4106-b054-7c7704bfcb95,944d2525-4cb4-4a53-9cbe-d80f6a9bbd3a,8eb4ceb1-abbe-4ac1-b23a-77b890fa1d89,508b5f83-1d68-4695-9e4c-5bfeac7e13a9"
+        postalcode="88400"
+        search="lat=48.8&lng=9.24&rad=10">
+</tk-web-component>
+```
 
 ## Project setup
 ```
