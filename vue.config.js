@@ -35,6 +35,10 @@ function enableShadowCss(config) {
 module.exports = {
     // https://cli.vuejs.org/guide/webpack.html#chaining-advanced
     chainWebpack: config => {
+        config.module
+            .rule("vue")
+            .use("vue-svg-inline-loader")
+            .loader("vue-svg-inline-loader")
         enableShadowCss(config);
     }
 }
