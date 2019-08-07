@@ -1,33 +1,145 @@
 <template>
-    <div>
-        <h1>TK Vue Web Component</h1>
-        <div class="message">{{ msg }}</div>
-        <tabs>
-            <tab title="Benzin">
-                E10
-            </tab>
-            <tab title="Super">
-                E5
-            </tab>
-            <tab title="Diesel">
-                Diesel
-            </tab>
-        </tabs>
+    <div v-cloak>
+        <div>
+            apikey: {{ apikey }} <br>
+            stations: {{ stations }}
+        </div>
+
+        <div class="tankerkoenig-info" v-if="!error">
+            <tabs>
+                <tab title="E10" >
+                    <div v-for="station in out_stations" v-bind:key="station.id">
+                        <div class="station">
+                            <div class="tkbrand">{{ station.brand }} </div>
+                            <div class="tkname">{{ station.name }} </div>
+                            <div class="tkadress">{{ station.street }}, {{ station.postalCode }} {{ station.place }} </div>
+                            <span class="gas-price"> {{ station.fuels | priceForFuel('Super E10') }}<sup>{{ station.fuels | priceForFuelLast('Super E10') }}</sup></span>
+                        </div>
+                    </div>
+                </tab>
+                <tab title="E5" >
+                    <div  v-for="station in out_stations" v-bind:key="station.id">
+                        <div class="station">
+                            <div class="tkbrand">{{ station.brand }} </div>
+                            <div class="tkname">{{ station.name }} </div>
+                            <div class="tkadress">{{ station.street }}, {{ station.postalCode }} {{ station.place }} </div>
+                            <span class="gas-price"> {{ station.fuels | priceForFuel('Super E5') }}<sup>{{ station.fuels | priceForFuelLast('Super E5') }}</sup></span>
+                        </div>
+                    </div>
+                </tab>
+                <tab title="Diesel"  >
+                    <div v-for="station in out_stations" v-bind:key="station.id">
+                        <div class="station">
+                            <div class="tkbrand">{{ station.brand }} </div>
+                            <div class="tkname">{{ station.name }} </div>
+                            <div class="tkadress">{{ station.street }}, {{ station.postalCode }} {{ station.place }} </div>
+                            <span class="gas-price"> {{ station.fuels | priceForFuel('Diesel') }}<sup>{{ station.fuels | priceForFuelLast('Diesel') }}</sup></span>
+                        </div>
+                    </div>
+                </tab>
+            </tabs>
+        </div>
+
+        <div class="tankerkoenig-info" v-else>
+            <h2> Uu, oh, ein Fehler! </h2>
+            <br>
+            API key : {{ this.apikey }}
+            <br>
+            Station : {{ this.stations }}
+        </div>
     </div>
+
 </template>
 
 <script>
     import axios from 'axios';
     import { Tabs, Tab } from 'vue-slim-tabs';
     export default {
-        props: ['msg'],
+        props: {
+            apikey: {
+                type: String,
+                required: true,
+            },
+            stations: {
+                type: String,
+                required: false
+            }
+        },
         components: {
             Tabs, Tab
+        },
+        data() {
+            return {
+                API_URL : 'https://creativecommons.tankerkoenig.de/api/v4/',
+                in_stations: [],
+                out_stations: [],
+                error: false
+            }
+        },
+        filters: {
+            priceForFuel: function (fuels, name) {
+                if(fuels) {
+                    let item = fuels.filter(function (fuel) {
+                        return fuel.name === name;
+                    });
+
+                    let price = Number(item[0].price);
+                    return price.toString().substring(0, 4);
+                }
+                return
+            },
+
+            priceForFuelLast: function (fuels, name) {
+                if(fuels) {
+                    let item = fuels.filter(function (fuel) {
+                        return fuel.name === name;
+                    });
+
+                    let price = Number(item[0].price);
+
+                    return price.toString().slice(-1);
+                }
+                return
+            }
+        },
+        methods: {
+            getStationsByIds() {
+
+                let q_stations = this.in_stations.join(',');
+                const url = this.API_URL + 'stations/ids?ids=' + q_stations + '&apikey=' + this.apikey;
+
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.out_stations = response.data.stations;
+                    })
+                    .catch(() => {
+                        this.error = true
+                    })
+
+            }
+        },
+        mounted() {
+            if (this.stations.length > 0) {
+                this.in_stations = this.stations.split(',');
+            }
+
+            //decide how to call api
+            if (this.in_stations.length > 0) {
+                this.getStationsByIds();
+            }
+
         }
     }
 </script>
 <style>
-
+    .tankerkoenig-info {
+        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
+       /* font-family: var(--font-family, "Comic Sans MS");*/
+        font-size: var(--font-size, 14px);
+        color: var(--font-color, black);
+        background: var(--bg-color, white);
+    }
     .vue-tablist {
         list-style: none;
         display: flex;
@@ -39,10 +151,11 @@
         padding: 5px 10px;
         cursor: pointer;
         user-select: none;
-        border: 1px solid transparent;
+        /*border: 1px solid transparent;*/
+        border: var(--divider-color, 1px solid #e2e2e2);
         border-bottom-color: #e2e2e2;
         border-radius: 3px 3px 0 0;
-        background-color: white;
+        background-color: var(--tab-color, white);
         position: relative;
         bottom: -1px;
     }
@@ -50,18 +163,18 @@
     .vue-tab[aria-selected="true"] {
         border-color: #e2e2e2;
         border-bottom-color: transparent;
+        font-weight: bold;
     }
 
-    .vue-tab[aria-disabled="true"] {
-        cursor: not-allowed;
-        color: #999;
+    .station {
+        padding: var(--station-padding, 15px);
+        border-bottom: var(--divider-color, 1px solid #e2e2e2);
+    }
+    .tkbrand {
+        font-weight: bold;
     }
 
-    h1 {
-        color: var(--headline-text-color, red);
-    }
-
-    .message {
-        color: var(--message-text-color, blue);
+    .gas-price {
+        font-weight: bold;
     }
 </style>
