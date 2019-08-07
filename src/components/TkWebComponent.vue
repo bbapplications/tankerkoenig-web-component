@@ -42,7 +42,6 @@
                 </tab>
             </tabs>
         </div>
-
         <div class="tankerkoenig-info" v-else>
             <h2> Uu, oh, ein Fehler! </h2>
             <br>
@@ -50,6 +49,7 @@
             <br>
             Station : {{ this.stations }}
         </div>
+        <div class="tkcredentials">powered by <a href="https://www.tankerkoenig.de"><img svg-inline class="icon" src="../assets/TK-Logo.svg" style="vertical-align:middle;" alt=""></a></div>
     </div>
 
 </template>
@@ -218,5 +218,16 @@
 
     .gas-price {
         font-weight: bold;
+    }
+
+    .tkcredentials {
+        color: #34495D;
+        padding: 12px;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: middle;
+    }
+    .icon {
+        padding-left: 5px;
     }
 </style>
