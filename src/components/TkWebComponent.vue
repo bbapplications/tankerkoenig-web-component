@@ -63,6 +63,14 @@
             stations: {
                 type: String,
                 required: false
+            },
+            postalcode: {
+                type: String,
+                required: false
+            },
+            search: {
+                type: String,
+                required: false
             }
         },
         components: {
@@ -117,16 +125,47 @@
                         this.error = true
                     })
 
+            },
+            getStationsByPLZ() {
+
+                const url = this.API_URL + 'stations/postalcode?postalcode=' + this.postalcode + '&apikey=' + this.apikey;
+
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.out_stations = response.data.stations;
+                    })
+                    .catch(() => {
+                        this.error = true
+                    })
+
+            },
+            getStationsByCoords() {
+
+                const url = this.API_URL + 'stations/search&' + this.search + '&apikey=' + this.apikey;
+
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.out_stations = response.data.stations;
+                    })
+                    .catch(() => {
+                        this.error = true
+                    })
+
             }
         },
         mounted() {
-            if (this.stations.length > 0) {
+            if (this.stations && this.stations.length > 0) {
                 this.in_stations = this.stations.split(',');
             }
 
-            //decide how to call api
             if (this.in_stations.length > 0) {
                 this.getStationsByIds();
+            } else if (this.postalcode && this.postalcode.length !== 0) {
+               this.getStationsByPLZ();
+            } else if(this.search && this.search.length > 0) {
+                this.getStationsByCoords()
             }
 
         }
@@ -151,8 +190,8 @@
         padding: 5px 10px;
         cursor: pointer;
         user-select: none;
-        /*border: 1px solid transparent;*/
-        border: var(--divider-color, 1px solid #e2e2e2);
+        border: 1px solid transparent;
+       /* border: var(--divider-color, 1px solid #e2e2e2);*/
         border-bottom-color: #e2e2e2;
         border-radius: 3px 3px 0 0;
         background-color: var(--tab-color, white);
