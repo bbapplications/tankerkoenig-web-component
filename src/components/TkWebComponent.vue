@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>TK Vue Web Component</h1>
-        <div>{{ msg }}</div>
+        <div class="message">{{ msg }}</div>
     </div>
 </template>
 
@@ -10,3 +10,12 @@
         props: ['msg']
     }
 </script>
+<style>
+    h1 {
+        color: var(--headline-text-color, red);
+    }
+
+    .message {
+        color: var(--message-text-color, blue);
+    }
+</style>
