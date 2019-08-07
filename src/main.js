@@ -1,8 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import wrap from '@vue/web-component-wrapper';
+import TkWebComponent from './components/TkWebComponent';
 
-Vue.config.productionTip = false
+const WrappedElement = wrap(Vue, TkWebComponent);
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+window.customElements.define('tk-web-component', WrappedElement);
