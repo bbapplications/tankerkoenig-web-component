@@ -18,12 +18,11 @@ npm install @vue/web-component-wrapper --save-dev
 inside the component use css varibales with default values as fallback
 ```html
 <style>
-    h1 {
-        color: var(--headline-text-color, red);
-    }
-
-    .message {
-        color: var(--message-text-color, blue);
+    .tankerkoenig-info {
+        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
+        font-size: var(--font-size, 14px);
+        color: var(--font-color, black);
+        background: var(--bg-color, white);
     }
 </style>
 
@@ -31,9 +30,15 @@ inside the component use css varibales with default values as fallback
 customers can overwerite these styles on their page i.e with a style tag in head
 
 <style>
+
     tk-web-component {
-        --headline-text-color: green;
-        --message-text-color: purple;
+        --font-family: "Comic Sans MS";
+        --font-size: 30px;
+        --font-color: #e9e9eb;
+        --bg-color: #3232cc;
+        --tab-color: #222272;
+        --station-padding: 20px;
+        --divider-color: 1px solid red;
     }
 </style>
 
