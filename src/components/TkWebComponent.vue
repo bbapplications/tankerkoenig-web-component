@@ -374,6 +374,7 @@
 
     .tkbrand {
         font-weight: bold;
+        color: var(--brand-color, black);
     }
 
     .gas-price {
