@@ -54,12 +54,67 @@ or something like this
         --font-family: "Comic Sans MS";
         --font-size: 24px;
         --font-color: #e9e9eb;
+        --brand-color: white;
         --price-color: #08ff06;
         --price-fontsize: 60px;
         --bg-color: #34495D;
         --tab-color: #203444;
         --station-padding: 20px;
         --time-fontsize: 16px;
+    }
+</style>
+```
+
+or this 
+```html
+<style>
+    tk-web-component {
+        --widget-with: 320px;
+        --widget-height: 500px;
+        --font-family: "Helvetica";
+        --font-size: 14px;
+        --price-fontsize: 24px;
+        --price-color: #ffc828;
+        --time-fontsize: 8px;
+        --font-color: white;
+        --brand-color: #2096ff;
+        --bg-color: #34495D;
+        --tab-color: rgba(48, 65, 86, 0.98);
+        --station-padding: 20px;
+        --divider: 1px solid #000000
+    }
+</style>
+```
+hipster style 
+```html
+<style>
+    tk-web-component {
+        --font-family: "Courier";
+        --brand-color: #8bafa1;
+        --font-size: 14px;
+        --font-color: #837970;
+        --bg-color: #e8e7d4;
+        --divider: 1px solid #cdc9b2;
+        --station-padding: 25px;
+    }
+</style>
+
+```
+some mogelesbrown
+
+```html
+<style>
+    tk-web-component {
+        --tab-color: #584848;
+        --brand-color: #f4b557;
+        --font-size: 18px;
+        --font-color: #d8d9de;
+        --price-color: #6e7888;
+        --price-fontsize: 50px;
+        --bg-color: #393b44;
+        --divider: 1px solid #584848;
+        --station-padding: 25px;
+        --time-fontsize: 14px;
     }
 </style>
 ```
