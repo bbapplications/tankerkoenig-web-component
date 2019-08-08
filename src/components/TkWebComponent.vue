@@ -6,17 +6,19 @@
                     <div v-for="station in out_stations" v-bind:key="station.id">
                         <div class="station row" v-if="hasFuel(station.fuels, 'Super E10')">
                             <div class="price">
-                                <div class="gas-price"> {{ station.fuels | priceForFuel('Super E10') }}<sup>{{
-                                    station.fuels | priceForFuelLast('Super E10') }}</sup></div>
+                                <div class="gas-price">{{ station.fuels | priceForFuel('Super E10') }}<sup>
+                                    {{ station.fuels | priceForFuelLast('Super E10') }}</sup>
+                                </div>
                                 <div class="opentimes">
                                     <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br> {{ station.closesAt | formatDate
-                                            }} Uhr
+                                        <div v-if="station.closesAt">geöffnet bis<br>
+                                            {{ station.closesAt | formatDate }} Uhr
                                         </div>
                                         <div v-if="station.openingTimes.length==0">24h geöffnet</div>
                                     </div>
                                     <div v-if="station.isClosed">
-                                        <div v-if="station.opensAt">öffnet um <br>{{ station.opensAt | formatDate }} Uhr
+                                        <div v-if="station.opensAt">öffnet um <br>
+                                            {{ station.opensAt | formatDate }} Uhr
                                         </div>
                                     </div>
                                 </div>
@@ -25,8 +27,8 @@
                                 <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
                                 <div v-else class="tkbrand">{{ station.name }}</div>
                                 <br>
-                                <div class="tkadress">{{ station.street }}<br> {{ station.postalCode }} {{ station.place
-                                    }}
+                                <div class="tkadress">{{ station.street }}<br>
+                                    {{ station.postalCode }} {{ station.place }}
                                 </div>
                             </div>
                         </div>
@@ -36,17 +38,19 @@
                     <div v-for="station in out_stations" v-bind:key="station.id">
                         <div class="station row" v-if="hasFuel(station.fuels, 'Super E5')">
                             <div class="price">
-                                <div class="gas-price"> {{ station.fuels | priceForFuel('Super E5') }}<sup>{{
-                                    station.fuels | priceForFuelLast('Super E5') }}</sup></div>
+                                <div class="gas-price"> {{ station.fuels | priceForFuel('Super E5') }}
+                                    <sup>{{ station.fuels | priceForFuelLast('Super E5') }}</sup>
+                                </div>
                                 <div class="opentimes">
                                     <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br> {{ station.closesAt | formatDate
-                                            }} Uhr
+                                        <div v-if="station.closesAt">geöffnet bis<br>
+                                            {{ station.closesAt | formatDate }} Uhr
                                         </div>
                                         <div v-if="station.openingTimes.length==0">24h geöffnet</div>
                                     </div>
                                     <div v-if="station.isClosed">
-                                        <div v-if="station.opensAt">öffnet um <br>{{ station.opensAt | formatDate }} Uhr
+                                        <div v-if="station.opensAt">öffnet um <br>
+                                            {{ station.opensAt | formatDate }} Uhr
                                         </div>
                                     </div>
                                 </div>
@@ -55,8 +59,8 @@
                                 <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
                                 <div v-else class="tkbrand">{{ station.name }}</div>
                                 <br>
-                                <div class="tkadress">{{ station.street }}<br> {{ station.postalCode }} {{ station.place
-                                    }}
+                                <div class="tkadress">{{ station.street }}<br>
+                                    {{ station.postalCode }} {{ station.place }}
                                 </div>
                             </div>
                         </div>
@@ -66,17 +70,19 @@
                     <div v-for="station in out_stations" v-bind:key="station.id">
                         <div class="station row" v-if="hasFuel(station.fuels, 'Diesel')">
                             <div class="price">
-                                <div class="gas-price"> {{ station.fuels | priceForFuel('Diesel') }}<sup>{{
-                                    station.fuels | priceForFuelLast('Diesel') }}</sup></div>
+                                <div class="gas-price"> {{ station.fuels | priceForFuel('Diesel') }}
+                                    <sup>{{ station.fuels | priceForFuelLast('Diesel') }}</sup>
+                                </div>
                                 <div class="opentimes">
                                     <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br> {{ station.closesAt | formatDate
-                                            }} Uhr
+                                        <div v-if="station.closesAt">geöffnet bis<br>
+                                            {{ station.closesAt | formatDate }} Uhr
                                         </div>
                                         <div v-if="station.openingTimes.length==0">24h geöffnet</div>
                                     </div>
                                     <div v-if="station.isClosed">
-                                        <div v-if="station.opensAt">öffnet um <br>{{ station.opensAt | formatDate }} Uhr
+                                        <div v-if="station.opensAt">öffnet um <br>
+                                            {{ station.opensAt | formatDate }} Uhr
                                         </div>
                                     </div>
                                 </div>
@@ -85,8 +91,8 @@
                                 <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
                                 <div v-else class="tkbrand">{{ station.name }}</div>
                                 <br>
-                                <div class="tkadress">{{ station.street }}<br> {{ station.postalCode }} {{ station.place
-                                    }}
+                                <div class="tkadress">{{ station.street }}<br>
+                                    {{ station.postalCode }} {{ station.place }}
                                 </div>
                             </div>
                         </div>
@@ -205,7 +211,7 @@
                     .then(response => {
                         this.out_stations = response.data.stations;
                     })
-                    .catch(() => {
+                    .catch((e) => {
                         this.error = true;
                         this.errormsg = e.response.data.message;
                     })
@@ -234,7 +240,7 @@
                     .then(response => {
                         this.out_stations = response.data.stations;
                     })
-                    .catch(() => {
+                    .catch((e) => {
                         this.error = true;
                         this.errormsg = e.response.data.message;
                     })
@@ -299,40 +305,10 @@
 </script>
 <style>
 
-    .row {
-        display: flex;
-    }
-
-    .price {
-        flex: auto;
-        display: flex;
-        height: auto;
-        flex-direction: column;
-    }
-
-    .info {
-        flex: 80%
-    }
-
-    .opentimes {
-        font-size: 12px;
-        display: table-cell;
-        height: 20%;
-        vertical-align: bottom;
-    }
-
     .tkwidget-wrapper {
-        width: 100%;
-        max-height: 100%;
+        width:  var(--widget-with,100%);
+        max-height: var(--widget-height,100%);
         overflow: auto;
-    }
-
-    .tankerkoenig-info {
-        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
-        /* font-family: var(--font-family, "Comic Sans MS");*/
-        font-size: var(--font-size, 16px);
-        color: var(--font-color, black);
-        background: var(--bg-color, white);
     }
 
     .vue-tablist {
@@ -361,9 +337,42 @@
         font-weight: bold;
     }
 
+
+    .row {
+        display: flex;
+    }
+
+    .price {
+        flex: auto;
+        display: flex;
+        height: auto;
+        flex-direction: column;
+        padding-right: 20px;
+    }
+
+    .info {
+        flex: 80%
+    }
+
+    .opentimes {
+        font-size: var(--time-fontsize,10px);
+        display: table-cell;
+        height: 20%;
+        vertical-align: bottom;
+    }
+
+
+    .tankerkoenig-info {
+        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
+        /* font-family: var(--font-family, "Comic Sans MS");*/
+        font-size: var(--font-size, 16px);
+        color: var(--font-color, black);
+        background: var(--bg-color, white);
+    }
+
     .station {
         padding: var(--station-padding, 15px);
-        border-bottom: var(--divider-color, 1px solid #e2e2e2);
+        border-bottom: var(--divider, 1px solid #e2e2e2);
     }
 
     .tkbrand {
@@ -372,7 +381,8 @@
 
     .gas-price {
         font-weight: bold;
-        font-size: 24px;
+        font-size: var(--price-fontsize, 24px);
+        color: var(--price-color, black);
         display: table-cell;
         height: 80%;
     }
