@@ -99,7 +99,7 @@
             <br>
             API key : {{ this.apikey }}
             <br>
-            Station : {{ this.stations }}
+            Fehler : {{ this.errormsg }}
         </div>
         <div class="tkcredentials">powered by <a href="https://www.tankerkoenig.de"><img svg-inline class="icon"
                                                                                          src="../assets/TK-Logo.svg"
@@ -113,7 +113,6 @@
     import axios from 'axios';
     import { Tabs, Tab } from 'vue-slim-tabs';
     import dayjs from 'dayjs';
-    /*import moment from 'moment';*/
     export default {
         props: {
             apikey: {
@@ -124,14 +123,23 @@
                 type: String,
                 required: false
             },
-            postalcode: {
+            plz: {
                 type: String,
                 required: false
             },
-            search: {
+            lat: {
                 type: String,
                 required: false
+            },
+            lng: {
+                type: String,
+                required: false
+            },
+            rad: {
+                type: Number,
+                required: false
             }
+
         },
         components: {
             Tabs, Tab
@@ -141,14 +149,14 @@
                 API_URL: 'https://creativecommons.tankerkoenig.de/api/v4/',
                 in_stations: [],
                 out_stations: [],
-                e10_stations: [],
-                error: false
+                radius: 5,
+                error: false,
+                errormsg: ''
             }
         },
 
         filters: {
             priceForFuel: function (fuels, name) {
-
                 if (fuels) {
                     let item = fuels.filter(function (fuel) {
                         return fuel.name === name;
@@ -162,7 +170,6 @@
 
 
             priceForFuelLast: function (fuels, name) {
-
                 if (fuels) {
                     let item = fuels.filter(function (fuel) {
                         return fuel.name === name;
@@ -174,13 +181,11 @@
                     return price.toString().slice(-1);
                 }
                 return
-
             },
 
             formatDate: function (value) {
                 if (value) {
                     let display = dayjs(String(value)).format('HH:mm');
-                    //let display = moment(String(value)).format('HH:mm');
                     return display;
                 } else {
                     return ''
@@ -201,34 +206,37 @@
                         this.out_stations = response.data.stations;
                     })
                     .catch(() => {
-                        this.error = true
+                        this.error = true;
+                        this.errormsg = e.response.data.message;
                     })
 
             },
             getStationsByPLZ() {
 
-                const url = this.API_URL + 'stations/postalcode?postalcode=' + this.postalcode + '&apikey=' + this.apikey;
+                const url = this.API_URL + 'stations/postalcode?postalcode=' + this.plz + '&apikey=' + this.apikey;
 
                 axios
                     .get(url)
                     .then(response => {
                         this.out_stations = response.data.stations;
                     })
-                    .catch(() => {
-                        this.error = true
+                    .catch((e) => {
+                        this.error = true;
+                        this.errormsg = e.response.data.message;
                     })
 
             },
             getStationsByCoords() {
 
-                const url = this.API_URL + 'stations/search?apikey=' + this.apikey + this.search;
+                const url = this.API_URL + 'stations/search?apikey=' + this.apikey + '&lat=' + this.lat + '&lng='+this.lng + '&rad=' + this.radius;
                 axios
                     .get(url)
                     .then(response => {
                         this.out_stations = response.data.stations;
                     })
                     .catch(() => {
-                        this.error = true
+                        this.error = true;
+                        this.errormsg = e.response.data.message;
                     })
 
             },
@@ -253,10 +261,37 @@
 
             if (this.in_stations.length > 0) {
                 this.getStationsByIds();
-            } else if (this.postalcode && this.postalcode.length !== 0) {
-                this.getStationsByPLZ();
-            } else if (this.search && this.search.length > 0) {
+            } else if (this.plz && this.plz.length !== 0) {
+                if(this.plz.length < 5 || this.plz.length > 5 || isNaN(this.plz)) {
+                    this.error = true;
+                    this.errormsg = 'Postleitzahl muss 5-stellig sein - Keine gültige PLZ.'
+                } else {
+                    this.getStationsByPLZ();
+                }
+
+            } else if (this.lat.length > 0 &&  this.lng.length > 0) {
+
+                if(isNaN(this.lat) || (Number(this.lat) < 47) || (Number(this.lat) >  56) ) {
+                    this.error = true;
+                    this.errormsg = 'lat Wert falsch'
+                }
+
+                if(isNaN(this.lng) || (Number(this.lng) < 6 ) || (Number(this.lng) >  15 ) ) {
+                    this.error = true;
+                    this.errormsg = 'lng Wert falsch'
+                }
+
+                if(this.rad) {
+                    this.radius = this.rad;
+                } else {
+                    this.radius = 5
+                }
+
                 this.getStationsByCoords()
+
+            } else {
+                this.error = true;
+                this.errormsg = 'Konfigurationsdaten fehlen: stations bzw. plz eintragen. '
             }
 
         }
