@@ -31,17 +31,17 @@ customers can overwerite these styles on their page i.e with a style tag in head
 ```html
 <style>
     tk-web-component {
-        --widget-with: 400px;
+        --widget-with: 320px;
         --widget-height: 500px;
         --font-family: "Arial";
-        --font-size: 18px;
-        --price-fontsize: 30px;
+        --font-size: 16px;
+        --price-fontsize: 32px;
         --price-color: #304156;
         --time-fontsize: 12px;
         --font-color: rgba(0, 0, 0, 0.99);
         --bg-color: #ffc828;
         --tab-color: rgba(183, 142, 17, 0.98);
-        --station-padding: 18px;
+        --station-padding: 20px;
         --divider: 5px solid #dbdbdb
     }
 </style>
@@ -54,7 +54,7 @@ or something like this
         --font-family: "Comic Sans MS";
         --font-size: 24px;
         --font-color: #e9e9eb;
-        --price-color: white;
+        --price-color: #08ff06;
         --price-fontsize: 60px;
         --bg-color: #34495D;
         --tab-color: #203444;
