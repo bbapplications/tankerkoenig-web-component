@@ -28,19 +28,42 @@ inside the component use css varibales with default values as fallback
 
 ```
 customers can overwerite these styles on their page i.e with a style tag in head
-
+```html
 <style>
-
     tk-web-component {
-        --font-family: "Comic Sans MS";
-        --font-size: 30px;
-        --font-color: #e9e9eb;
-        --bg-color: #3232cc;
-        --tab-color: #222272;
-        --station-padding: 20px;
-        --divider-color: 1px solid red;
+        --widget-with: 400px;
+        --widget-height: 500px;
+        --font-family: "Arial";
+        --font-size: 18px;
+        --price-fontsize: 30px;
+        --price-color: #304156;
+        --time-fontsize: 12px;
+        --font-color: rgba(0, 0, 0, 0.99);
+        --bg-color: #ffc828;
+        --tab-color: rgba(183, 142, 17, 0.98);
+        --station-padding: 18px;
+        --divider: 5px solid #dbdbdb
     }
 </style>
+```
+
+or something like this 
+```html
+<style>
+    tk-web-component {
+        --font-family: "Comic Sans MS";
+        --font-size: 24px;
+        --font-color: #e9e9eb;
+        --price-color: white;
+        --price-fontsize: 60px;
+        --bg-color: #34495D;
+        --tab-color: #203444;
+        --station-padding: 20px;
+        --time-fontsize: 16px;
+    }
+</style>
+```
+
 
 
 ## How to use this component
