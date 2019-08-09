@@ -307,14 +307,18 @@
     .tkwidget-wrapper {
         width:  var(--widget-with,100%);
         max-height: var(--widget-height,100%);
-        overflow: auto;
+        overflow-x: hidden;
+        /*overflow: auto;*/
     }
 
     .vue-tablist {
         list-style: none;
         display: flex;
-        padding-left: 0;
+        margin: 0;
+        padding: 0;
         border-bottom: 1px solid #e2e2e2;
+        top: 0;
+        height: 40px;
     }
 
     .vue-tab {
@@ -395,6 +399,7 @@
         font-size: 12px;
         line-height: 20px;
         vertical-align: middle;
+        background: white;
     }
 
     .icon {
