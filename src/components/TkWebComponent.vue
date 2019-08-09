@@ -118,6 +118,9 @@
     import axios from 'axios';
     import { Tabs, Tab } from 'vue-slim-tabs';
     import dayjs from 'dayjs';
+
+    axios.defaults.timeout = 15000;
+
     export default {
         props: {
             apikey: {
@@ -212,10 +215,15 @@
                     })
                     .catch((e) => {
                         this.error = true;
-                        this.errormsg = e.response.data.message;
-                    }).finally(
-                     this.errormsg = "no response from server"
-                    )
+
+                        if(e.message === 'Network Error'){
+                            this.errormsg = "Network Error"
+                        } else if (e.code === 'ECONNABORTED' || e.code ==='ERR_NAME_NOT_RESOLVED'){
+                            this.errormsg = "no response from server"
+                        } else {
+                            this.errormsg = e.response.data.message;
+                        }
+                    })
 
             },
             getStationsByPLZ() {
@@ -229,11 +237,15 @@
                     })
                     .catch((e) => {
                         this.error = true;
-                        this.errormsg = e.response.data.message;
-                    }).finally(
-                        this.errormsg = "no response from server"
-                    )
 
+                        if(e.message === 'Network Error'){
+                            this.errormsg = "Network Error"
+                        } else if (e.code === 'ECONNABORTED' || e.code ==='ERR_NAME_NOT_RESOLVED'){
+                            this.errormsg = "no response from server"
+                        } else {
+                            this.errormsg = e.response.data.message;
+                        }
+                    })
             },
             getStationsByCoords() {
 
@@ -245,10 +257,15 @@
                     })
                     .catch((e) => {
                         this.error = true;
-                        this.errormsg = e.response.data.message;
-                    }).finally(
-                        this.errormsg = "no response from server"
-                    )
+
+                        if(e.message === 'Network Error'){
+                            this.errormsg = "Network Error"
+                        } else if (e.code === 'ECONNABORTED' || e.code ==='ERR_NAME_NOT_RESOLVED'){
+                            this.errormsg = "no response from server"
+                        } else {
+                            this.errormsg = e.response.data.message;
+                        }
+                    })
 
             },
             hasFuel(fuels, fuelkind) {
