@@ -102,10 +102,14 @@
             <br>
             Fehler : {{ this.errormsg }}
         </div>
-        <div class="tkcredentials">powered by <a href="https://www.tankerkoenig.de"><img svg-inline class="icon"
-                                                                                         src="../assets/TK-Logo.svg"
-                                                                                         style="vertical-align:middle;"
-                                                                                         alt=""></a></div>
+        <div class="tkcredentials">powered by
+            <a href="https://www.tankerkoenig.de">
+                <img svg-inline class="icon"
+                     src="../assets/TK-Logo.svg"
+                     style="vertical-align:middle;"
+                     alt="">
+            </a>
+        </div>
     </div>
 
 </template>
