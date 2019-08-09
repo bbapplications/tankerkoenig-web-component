@@ -162,7 +162,6 @@
                 errormsg: ''
             }
         },
-
         filters: {
             priceForFuel: function (fuels, name) {
                 if (fuels) {
@@ -175,22 +174,17 @@
                 }
                 return
             },
-
-
             priceForFuelLast: function (fuels, name) {
                 if (fuels) {
                     let item = fuels.filter(function (fuel) {
                         return fuel.name === name;
                     });
 
-
                     let price = Number(item[0].price) || 0.000;
-
                     return price.toString().slice(-1);
                 }
                 return
             },
-
             formatDate: function (value) {
                 if (value) {
                     let display = dayjs(String(value)).format('HH:mm');
@@ -199,7 +193,6 @@
                     return ''
                 }
             },
-
             deCapitalize: function (input) {
                 if (input !== undefined) {
                     input = input.replace('/', ' / ');
@@ -242,16 +235,13 @@
                         }
                     }
                 }) : '';
-
             }
-
         },
-
         methods: {
             getStationsByIds() {
 
                 let q_stations = this.in_stations.join(',');
-                const url = this.API_URL + 'stations/ids?ids=' + q_stations + '&apikey=' + this.apikey;
+                const url = `${this.API_URL}stations/ids?ids=${q_stations}&apikey=${this.apikey}`;
 
                 axios
                     .get(url)
@@ -273,8 +263,7 @@
             },
             getStationsByPLZ() {
 
-                const url = this.API_URL + 'stations/postalcode?postalcode=' + this.plz + '&apikey=' + this.apikey;
-
+                const url = `${this.API_URL}stations/postalcode?postalcode=${this.plz}&apikey=${this.apikey}`;
                 axios
                     .get(url)
                     .then(response => {
@@ -294,7 +283,7 @@
             },
             getStationsByCoords() {
 
-                const url = this.API_URL + 'stations/search?apikey=' + this.apikey + '&lat=' + this.lat + '&lng='+this.lng + '&rad=' + this.radius;
+                const url = `${this.API_URL}stations/search?apikey=${this.apikey}&lat=${this.lat}&lng=${this.lng}&rad=${this.radius}`;
                 axios
                     .get(url)
                     .then(response => {
@@ -324,7 +313,6 @@
 
                 return hasFuel;
             }
-
         },
         mounted() {
 
