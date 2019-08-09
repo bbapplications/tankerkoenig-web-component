@@ -111,9 +111,7 @@
             </a>
         </div>
     </div>
-
 </template>
-
 <script>
     import axios from 'axios';
     import { Tabs, Tab } from 'vue-slim-tabs';
@@ -359,7 +357,6 @@
     }
 </script>
 <style>
-
     .tkwidget-wrapper {
         width:  var(--widget-with,100%);
         max-height: var(--widget-height,100%);
@@ -395,7 +392,6 @@
         border-bottom-color: transparent;
         font-weight: bold;
     }
-
 
     .row {
         display: flex;
