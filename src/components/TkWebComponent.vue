@@ -1,5 +1,5 @@
 <template>
-    <div class="tkwidget-wrapper" v-cloak>
+    <div id="tk-widget" class="tkwidget-wrapper" v-cloak>
         <div class="tankerkoenig-info" v-if="!error">
             <tabs>
                 <tab title="E10">
@@ -213,7 +213,9 @@
                     .catch((e) => {
                         this.error = true;
                         this.errormsg = e.response.data.message;
-                    })
+                    }).finally(
+                     this.errormsg = "no response from server"
+                    )
 
             },
             getStationsByPLZ() {
@@ -228,7 +230,9 @@
                     .catch((e) => {
                         this.error = true;
                         this.errormsg = e.response.data.message;
-                    })
+                    }).finally(
+                        this.errormsg = "no response from server"
+                    )
 
             },
             getStationsByCoords() {
@@ -242,7 +246,9 @@
                     .catch((e) => {
                         this.error = true;
                         this.errormsg = e.response.data.message;
-                    })
+                    }).finally(
+                        this.errormsg = "no response from server"
+                    )
 
             },
             hasFuel(fuels, fuelkind) {
