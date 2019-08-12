@@ -371,15 +371,14 @@
                 this.error = true;
                 this.errormsg = 'Konfigurationsdaten fehlen: stations bzw. plz eintragen. '
             }
-
         },
         updated: function () {
             this.$nextTick(function () {
-                try {
-                    let widgetHeight = this.$refs.tkwidget.offsetHeight;
-                    this.widgetheight = widgetHeight - 80 ;
-                } catch(e) {
-                    this.widgetheight = "100%"}
+
+
+                let widgetHeight = this.$refs.tkwidget.offsetHeight;
+                this.widgetheight = widgetHeight - 80 ;
+
             });
         }
     }
@@ -392,13 +391,12 @@
         overflow-y: hidden;
         background-color: var(--bg-color, white);
     }
-
     .vue-tablist {
         list-style: none;
         display: flex;
         margin: 0;
         padding: 0;
-        border-bottom: 1px solid #e2e2e2;
+        border-bottom: 2px solid var(--tab-border-color, white);
         top: 0;
         height: 40px;
         position: absolute;
@@ -411,7 +409,7 @@
     }
 
     .vue-tab {
-        padding: 10px 10px;
+        padding: 5px 10px;
         cursor: pointer;
         user-select: none;
         border: 2px solid transparent;
@@ -419,13 +417,15 @@
         background-color: var(--tab-color, white);
         position: relative;
         bottom: -1px;
+        opacity: 0.6;
 
     }
 
     .vue-tab[aria-selected="true"] {
-        border-color: #e2e2e2;
+        border-color: var(--tab-border-color, white);
         border-bottom-color: transparent;
         font-weight: bold;
+        opacity: 1;
     }
 
     .row {
@@ -435,7 +435,7 @@
     .price {
         flex: auto;
         display: flex;
-        height: auto;
+        height: inherit;
         width: auto;
         flex-direction: column;
         padding-right: 30px;
@@ -449,8 +449,8 @@
     .opentimes {
         font-size: var(--time-fontsize,10px);
         display: table-cell;
-        height: 30%;
         vertical-align: bottom;
+        margin-top: 20px;
     }
 
 
@@ -476,7 +476,6 @@
         font-size: var(--price-fontsize,24px);
         color: var(--price-color, black);
         display: table-cell;
-        height: 70%;
     }
 
     .tkcredentials {
@@ -494,7 +493,7 @@
     }
 
     .wrapper {
-        height: 10px;
+        height: 100%;
         width: 100%
     }
 
