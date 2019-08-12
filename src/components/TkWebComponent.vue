@@ -1,97 +1,112 @@
 <template>
-    <div id="tk-widget" class="tkwidget-wrapper" v-cloak>
+    <div class="tkwidget-wrapper" ref="tkwidget" v-cloak>
         <div class="tankerkoenig-info" v-if="!error">
             <tabs>
                 <tab title="E10">
-                    <div v-for="station in out_stations" v-bind:key="station.id">
-                        <div class="station row" v-if="hasFuel(station.fuels, 'Super E10')">
-                            <div class="price">
-                                <div class="gas-price">{{ station.fuels | priceForFuel('Super E10') }}<sup>{{ station.fuels | priceForFuelLast('Super E10') }}</sup></div>
-                                <div class="opentimes">
-                                    <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br>
-                                            {{ station.closesAt | formatDate }} Uhr
+                    <v-bar wrapper="wrapper" :style="{height: widgetheight + 'px'}">
+                        <div v-for="station in out_stations" v-bind:key="station.id" >
+                            <div class="station row" v-if="hasFuel(station.fuels, 'Super E10')" >
+                                <div class="price">
+                                    <div class="gas-price">{{ station.fuels | priceForFuel('Super E10') }}<sup>{{ station.fuels | priceForFuelLast('Super E10') }}</sup></div>
+                                    <div class="opentimes">
+                                        <div v-if="station.isOpen">
+                                            <div v-if="station.closesAt">geöffnet bis<br>
+                                                {{ station.closesAt | formatDate }} Uhr
+                                            </div>
+                                            <div v-if="station.openingTimes.length==0">24h geöffnet</div>
                                         </div>
-                                        <div v-if="station.openingTimes.length==0">24h geöffnet</div>
-                                    </div>
-                                    <div v-if="!station.isOpen">
-                                        <div v-if="station.opensAt">öffnet um <br>
-                                            {{ station.opensAt | formatDate }} Uhr
+                                        <div v-if="!station.isOpen">
+                                            <div v-if="station.opensAt">öffnet um <br>
+                                                {{ station.opensAt | formatDate }} Uhr
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="info">
-                                <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
-                                <div v-else class="tkbrand">{{ station.name }}</div>
-                                <br>
-                                <div class="tkadress">{{ station.street | deCapitalize }}<br>
-                                    {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                <div class="info">
+                                    <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
+                                    <div v-else class="tkbrand">{{ station.name }}</div>
+                                    <br>
+                                    <div class="tkadress">{{ station.street | deCapitalize }}<br>
+                                        {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="trayStyle"></div>
+                    </v-bar>
                 </tab>
                 <tab title="Super">
-                    <div v-for="station in out_stations" v-bind:key="station.id">
-                        <div class="station row" v-if="hasFuel(station.fuels, 'Super E5')">
-                            <div class="price">
-                                <div class="gas-price"> {{ station.fuels | priceForFuel('Super E5') }}<sup>{{ station.fuels | priceForFuelLast('Super E5') }}</sup>
-                                </div>
-                                <div class="opentimes">
-                                    <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br>
-                                            {{ station.closesAt | formatDate }} Uhr
-                                        </div>
-                                        <div v-if="station.openingTimes.length==0">24h geöffnet</div>
+                    <v-bar wrapper="wrapper" :style="{height: widgetheight + 'px'}"  vBar=""
+                           vBarInternal=""
+                           hBar=""
+                           hBarInternal="">
+                        <div v-for="station in out_stations" v-bind:key="station.id">
+                            <div class="station row" v-if="hasFuel(station.fuels, 'Super E5')">
+                                <div class="price">
+                                    <div class="gas-price"> {{ station.fuels | priceForFuel('Super E5') }}<sup>{{ station.fuels | priceForFuelLast('Super E5') }}</sup>
                                     </div>
-                                    <div v-if="!station.isOpen">
-                                        <div v-if="station.opensAt">öffnet um <br>
-                                            {{ station.opensAt | formatDate }} Uhr
+                                    <div class="opentimes">
+                                        <div v-if="station.isOpen">
+                                            <div v-if="station.closesAt">geöffnet bis<br>
+                                                {{ station.closesAt | formatDate }} Uhr
+                                            </div>
+                                            <div v-if="station.openingTimes.length==0">24h geöffnet</div>
+                                        </div>
+                                        <div v-if="!station.isOpen">
+                                            <div v-if="station.opensAt">öffnet um <br>
+                                                {{ station.opensAt | formatDate }} Uhr
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="info">
-                                <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
-                                <div v-else class="tkbrand">{{ station.name }}</div>
-                                <br>
-                                <div class="tkadress">{{ station.street | deCapitalize }}<br>
-                                    {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                <div class="info">
+                                    <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
+                                    <div v-else class="tkbrand">{{ station.name }}</div>
+                                    <br>
+                                    <div class="tkadress">{{ station.street | deCapitalize }}<br>
+                                        {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="trayStyle"></div>
+                    </v-bar>
                 </tab>
                 <tab title="Diesel">
-                    <div v-for="station in out_stations" v-bind:key="station.id">
-                        <div class="station row" v-if="hasFuel(station.fuels, 'Diesel')">
-                            <div class="price">
-                                <div class="gas-price"> {{ station.fuels | priceForFuel('Diesel') }}<sup>{{ station.fuels | priceForFuelLast('Diesel') }}</sup></div>
-                                <div class="opentimes">
-                                    <div v-if="station.isOpen">
-                                        <div v-if="station.closesAt">geöffnet bis<br>
-                                            {{ station.closesAt | formatDate }} Uhr
+                    <v-bar wrapper="wrapper" :style="{height: widgetheight + 'px'}"  vBar=""
+                           vBarInternal=""
+                           hBar=""
+                           hBarInternal="">
+                        <div v-for="station in out_stations" v-bind:key="station.id">
+                            <div class="station row" v-if="hasFuel(station.fuels, 'Diesel')">
+                                <div class="price">
+                                    <div class="gas-price"> {{ station.fuels | priceForFuel('Diesel') }}<sup>{{ station.fuels | priceForFuelLast('Diesel') }}</sup></div>
+                                    <div class="opentimes">
+                                        <div v-if="station.isOpen">
+                                            <div v-if="station.closesAt">geöffnet bis<br>
+                                                {{ station.closesAt | formatDate }} Uhr
+                                            </div>
+                                            <div v-if="station.openingTimes.length==0">24h geöffnet</div>
                                         </div>
-                                        <div v-if="station.openingTimes.length==0">24h geöffnet</div>
-                                    </div>
-                                    <div v-if="!station.isOpen">
-                                        <div v-if="station.opensAt">öffnet um <br>
-                                            {{ station.opensAt | formatDate }} Uhr
+                                        <div v-if="!station.isOpen">
+                                            <div v-if="station.opensAt">öffnet um <br>
+                                                {{ station.opensAt | formatDate }} Uhr
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="info">
-                                <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
-                                <div v-else class="tkbrand">{{ station.name }}</div>
-                                <br>
-                                <div class="tkadress">{{ station.street | deCapitalize }}<br>
-                                    {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                <div class="info">
+                                    <div v-if="station.brand" class="tkbrand">{{ station.brand }}</div>
+                                    <div v-else class="tkbrand">{{ station.name }}</div>
+                                    <br>
+                                    <div class="tkadress">{{ station.street | deCapitalize }}<br>
+                                        {{ station.postalCode }} {{ station.place | deCapitalize }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="trayStyle"></div>
+                    </v-bar>
                 </tab>
             </tabs>
         </div>
@@ -113,9 +128,12 @@
     </div>
 </template>
 <script>
+
     import axios from 'axios';
     import { Tabs, Tab } from 'vue-slim-tabs';
     import dayjs from 'dayjs';
+    import VBar from 'v-bar'
+
 
     axios.defaults.timeout = 15000;
 
@@ -148,7 +166,7 @@
 
         },
         components: {
-            Tabs, Tab
+            Tabs, Tab, VBar
         },
         data() {
             return {
@@ -157,7 +175,8 @@
                 out_stations: [],
                 radius: 5,
                 error: false,
-                errormsg: ''
+                errormsg: '',
+                widgetheight: 200
             }
         },
         filters: {
@@ -202,7 +221,7 @@
                         return input;
                     }
                 }
-                return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
+                return (input) ? input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
                     if (txt == 'am ' || txt == 'AM ' || txt == 'u. ' || txt == 'U . ' || txt == 'v. ' || txt == 'V.'
                         || txt == 'v.d ' || txt == 'V.D.' || txt == 'i.d. ' || txt == 'I.D. ' || txt == 'i.d.'
                         || txt == 'I.D.' || txt == 'a.d. ' || txt == 'A.D. ' || txt == 'im ' || txt == 'IM '
@@ -353,6 +372,15 @@
                 this.errormsg = 'Konfigurationsdaten fehlen: stations bzw. plz eintragen. '
             }
 
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                try {
+                    let widgetHeight = this.$refs.tkwidget.offsetHeight;
+                    this.widgetheight = widgetHeight - 80 ;
+                } catch(e) {
+                    this.widgetheight = "100%"}
+            });
         }
     }
 </script>
@@ -361,7 +389,8 @@
         width:  var(--widget-with,100%);
         max-height: var(--widget-height,100%);
         overflow-x: hidden;
-        /*overflow: auto;*/
+        overflow-y: hidden;
+        background-color: var(--bg-color, white);
     }
 
     .vue-tablist {
@@ -372,19 +401,25 @@
         border-bottom: 1px solid #e2e2e2;
         top: 0;
         height: 40px;
+        position: absolute;
+        margin-bottom: 40px;
+    }
+
+    .vue-tabpanel {
+        margin-top: 40px;
+        margin-bottom: 120px;
     }
 
     .vue-tab {
-        padding: 5px 10px;
+        padding: 10px 10px;
         cursor: pointer;
         user-select: none;
-        border: 1px solid transparent;
-        /* border: var(--divider-color, 1px solid #e2e2e2);*/
-        border-bottom-color: #e2e2e2;
-        border-radius: 3px 3px 0 0;
+        border: 2px solid transparent;
+        border-radius: 5px 5px 0 0;
         background-color: var(--tab-color, white);
         position: relative;
         bottom: -1px;
+
     }
 
     .vue-tab[aria-selected="true"] {
@@ -421,7 +456,6 @@
 
     .tankerkoenig-info {
         font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
-        /* font-family: var(--font-family, "Comic Sans MS");*/
         font-size: var(--font-size, 16px);
         color: var(--font-color, black);
         background: var(--bg-color, white);
@@ -429,7 +463,7 @@
 
     .station {
         padding: var(--station-padding, 15px);
-        border-bottom: var(--divider, 1px solid #e2e2e2);
+        border-top: var(--divider, 1px solid #e2e2e2);
     }
 
     .tkbrand {
@@ -449,12 +483,20 @@
         color: #34495D;
         padding: 12px;
         font-size: 12px;
-        line-height: 20px;
         vertical-align: middle;
         background: white;
+        position: sticky;
+        bottom: 0px;
     }
 
     .icon {
         padding-left: 5px;
     }
+
+    .wrapper {
+        height: 10px;
+        width: 100%
+    }
+
+
 </style>
