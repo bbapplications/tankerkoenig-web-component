@@ -7,9 +7,10 @@
   <title>Tankerkönig web component</title>
 
   <style>
-    .mywidget {
-      height: 500px;
-      width: 300px;
+
+    .widgetOuterDiv {
+      height: 350px;
+      width: 320px;
       top: 50px;
       left: 100px;
       position: relative;
@@ -18,20 +19,28 @@
 
   <style>
 
-    tk-web-component {
+   tk-web-component {
+     --font-family: "Helvetica";
+     --font-size: 14px;
+     --price-fontsize: 24px;
+     --price-color: #ffc828;
+     --time-fontsize: 8px;
+     --font-color: white;
+     --brand-color: #2096ff;
+     --bg-color: #34495D;
+     --tab-color: rgba(32, 46, 64, 0.98);
+     --tab-border-color: rgba(110, 120, 136, 0.98);
+     --station-padding: 20px;
+     --divider: 1px solid #000000
+   }
 
-      --font-family: "Arial";
-      --bg-color: #2096ff;
-      --font-color: white;
-      --tab-color: #203444;
-
-
-    }
   </style>
+
+
 </head>
 <body>
 <noscript>You need javascript.</noscript>
-<div class="mywidget">
+<div class="widgetOuterDiv">
   <tk-web-component
       apikey="00000000-0000-0000-0000-000000000002"
       lat="48.8"
