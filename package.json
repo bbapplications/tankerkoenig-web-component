@@ -9,11 +9,12 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "better-scroll": "^1.15.2",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.15",
-    "v-bar": "^3.0.0",
     "vue": "^2.6.10",
-    "vue-slim-tabs": "^0.3.0"
+    "vue-slim-tabs": "^0.3.0",
+    "vuescroll": "^4.13.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
