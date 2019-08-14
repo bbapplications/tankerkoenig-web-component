@@ -1,7 +1,9 @@
 {
   "name": "tk-web-component",
   "version": "0.1.0",
-  "private": true,
+  "description": "custom web component for modern browsers - using the tankerkönig API - stylable with css vars",
+  "autho": "Bruno Bührlen <info@bb-applications.de>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target wc --name tk-web-component ./src/components/TkWebComponent.vue",
