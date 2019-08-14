@@ -1,16 +1,21 @@
 # tk-web-component
 
+[link text itself]: http://www.reddit.com
+
 ## Purpose
-build a self contained custom web component for modern browsers using the tankerkönig API.
-This "widget" like component is stylable with css vars form outside,
+build a self contained custom web component for modern browsers using the [tankerkönig API](https://creativecommons.tankerkoenig.de/swagger/)
+
+This "widget"-like component is stylable with css variables from outside the component.
+
+ ![plain widget](images/ScreenShotPlain.png)  ![syled widget](images/Screenshot.png)  
 
 ## Project preperation
 
 using vue cli > 3
 
-initial setup following this post on medium
+initial setup following this [post](https://medium.com/@royprins/get-started-with-vue-web-components-593b3d5b3200) on medium
 
-https://medium.com/@royprins/get-started-with-vue-web-components-593b3d5b3200
+
 ```
 vue create tk-web-component
 npm install @vue/web-component-wrapper --save-dev
@@ -45,7 +50,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## Styling
-inside the component css varibales are used with default values as fallback
+inside the component css variables are used with default values as fallback
 ```html
 <style>
     wrapper {
@@ -58,7 +63,7 @@ inside the component css varibales are used with default values as fallback
 </style>
 
 ```
-customers can overwerite these styles on their page i.e with a style tag in head
+users of the component can overwrite the styles on their page with a style tag in the head section of their page
 
 #### available css-vars
 
@@ -195,7 +200,6 @@ customers can overwerite these styles on their page i.e with a style tag in head
     }
 ```
 the component inherits the dimensions from this surrounding div
-
 
 #### set the web component properties
 ```html
