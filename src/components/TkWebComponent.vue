@@ -134,7 +134,11 @@ import { Tabs, Tab } from 'vue-slim-tabs'
 import dayjs from 'dayjs'
 import vuescroll from 'vuescroll'
 
-axios.defaults.timeout = 15000
+const tkapi = axios.create({
+  baseURL: 'https://creativecommons.tankerkoenig.de/api/v4/',
+  timeout: 15000
+  // headers: { 'TK-Web-Component': '1.0' } // OPTION request CORS problem
+})
 
 export default {
   components: {
@@ -255,7 +259,6 @@ export default {
         height: 0
       },
       updated: false,
-      API_URL: 'https://creativecommons.tankerkoenig.de/api/v4/',
       in_stations: [],
       out_stations: [],
       radius: 5,
@@ -321,11 +324,13 @@ export default {
   },
   methods: {
     getStationsByIds() {
-      const q_stations = this.in_stations.join(',')
-      const url = `${this.API_URL}stations/ids?ids=${q_stations}&apikey=${this.apikey}`
-
-      axios
-        .get(url)
+      const url = 'stations/ids'
+      const params = {
+        ids: this.in_stations.join(','),
+        apikey: this.apikey
+      }
+      tkapi
+        .get(url, { params })
         .then(response => {
           this.out_stations = response.data.stations
         })
@@ -342,9 +347,13 @@ export default {
         })
     },
     getStationsByPLZ() {
-      const url = `${this.API_URL}stations/postalcode?postalcode=${this.plz}&apikey=${this.apikey}`
-      axios
-        .get(url)
+      const params = {
+        postalcode: this.plz,
+        apikey: this.apikey
+      }
+      const url = 'stations/postalcode'
+      tkapi
+        .get(url, { params })
         .then(response => {
           this.out_stations = response.data.stations
         })
@@ -361,9 +370,15 @@ export default {
         })
     },
     getStationsByCoords() {
-      const url = `${this.API_URL}stations/search?apikey=${this.apikey}&lat=${this.lat}&lng=${this.lng}&rad=${this.radius}`
-      axios
-        .get(url)
+      const params = {
+        apikey: this.apikey,
+        lat: this.lat,
+        lng: this.lng,
+        rad: this.rad
+      }
+      const url = 'stations/search'
+      tkapi
+        .get(url, { params })
         .then(response => {
           this.out_stations = response.data.stations
         })
