@@ -4,7 +4,7 @@
 build a self contained custom web component for modern browsers using the tankerkönig API.
 This "widget" like component is stylable with css vars form outside,
 
-## Project preparation
+## Project preperation
 
 using vue cli > 3
 
@@ -18,8 +18,34 @@ npm install @vue/web-component-wrapper --save-dev
 ```
 
 
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
 ## Styling
-inside the component use css varibales with default values as fallback
+inside the component css varibales are used with default values as fallback
 ```html
 <style>
     .tankerkoenig-info {
@@ -32,6 +58,27 @@ inside the component use css varibales with default values as fallback
 
 ```
 customers can overwerite these styles on their page i.e with a style tag in head
+
+####available css-vars
+
+```html
+--bg-color          //widget background color - default #fff
+--font-color        //main font color - default #000
+--font-family       //font family -default 'Open Sans,Arial,Helvetica,sans-serif'
+--station-padding   //padding used by a station item - default 15px
+--font-size         //main fint size - default 16px
+--tab-color         //color of tab background - default #fff
+--tab-border-color  //tab surrounding border - default #fff
+--time-fontsize     //font size for opening times - default 10px
+--brand-color       //fuel bran color - default #000
+--price-color       //price color - default #000
+--price-fontsize    //price font size - default 24px
+--divider           //station divider - default '1px solid #e2e2e2'
+```
+
+
+####example
+
 ```html
 <style>
     tk-web-component {
@@ -51,7 +98,7 @@ customers can overwerite these styles on their page i.e with a style tag in head
 </style>
 ```
 
-or something like this 
+####or something like this 
 ```html
 <style>
     tk-web-component {
@@ -69,12 +116,10 @@ or something like this
 </style>
 ```
 
-or this 
+#### or this 
 ```html
 <style>
     tk-web-component {
-        --widget-with: 320px;
-        --widget-height: 500px;
         --font-family: "Helvetica";
         --font-size: 14px;
         --price-fontsize: 24px;
@@ -89,7 +134,7 @@ or this
     }
 </style>
 ```
-hipster style 
+#### hipster style 
 ```html
 <style>
     tk-web-component {
@@ -104,7 +149,7 @@ hipster style
 </style>
 
 ```
-some mogelesbrown
+####some 'mongelesbraun'
 
 ```html
 <style>
@@ -127,18 +172,31 @@ some mogelesbrown
 
 ## How to use this component
 
+
+####add vuejs from the cdn and the component itself in the head section of your page
 ```html
 <script src="https://unpkg.com/vue"></script>
 <script src="./tk-web-component.min.js"></script>
-
-<style>
-    tk-web-component {
-      ...
-    }
-</style>
-
 ```
 
+####place the tk-web-component inside a div with ``id="tkwidget"``
+
+```html
+<div id="tkwidget" class="widgetOuterDiv">
+    <tk-web-component apikey="your-api-key" plz="xxxxx"></tk-web-component>
+</div>
+```
+####add your preferred width and height to this surrounding
+```html
+.widgetOuterDiv {
+      height: 600px;
+      width: 320px;
+    }
+```
+the component inherits the dimensions from this surrounding div
+
+
+#### set the web component properties
 ```html
 <tk-web-component
     apikey="00000000-0000-0000-0000-000000000002"
@@ -149,30 +207,7 @@ some mogelesbrown
     rad="2"></tk-web-component>
 ```
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* apikey [required]
+* stations [array of station ids] or
+* plz "german postleitzahl" or
+* lng, lat, rad 
