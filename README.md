@@ -48,18 +48,19 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 inside the component css varibales are used with default values as fallback
 ```html
 <style>
-    .tankerkoenig-info {
+    wrapper {
         font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
         font-size: var(--font-size, 14px);
         color: var(--font-color, black);
         background: var(--bg-color, white);
+        ...
     }
 </style>
 
 ```
 customers can overwerite these styles on their page i.e with a style tag in head
 
-####available css-vars
+#### available css-vars
 
 ```html
 --bg-color          //widget background color - default #fff
@@ -77,7 +78,7 @@ customers can overwerite these styles on their page i.e with a style tag in head
 ```
 
 
-####example
+#### example
 
 ```html
 <style>
@@ -98,7 +99,7 @@ customers can overwerite these styles on their page i.e with a style tag in head
 </style>
 ```
 
-####or something like this 
+#### or something like this 
 ```html
 <style>
     tk-web-component {
@@ -149,7 +150,7 @@ customers can overwerite these styles on their page i.e with a style tag in head
 </style>
 
 ```
-####some 'mongelesbraun'
+#### some 'mongelesbraun'
 
 ```html
 <style>
@@ -173,20 +174,20 @@ customers can overwerite these styles on their page i.e with a style tag in head
 ## How to use this component
 
 
-####add vuejs from the cdn and the component itself in the head section of your page
+#### add vuejs from the cdn and the component itself in the head section of your page
 ```html
 <script src="https://unpkg.com/vue"></script>
 <script src="./tk-web-component.min.js"></script>
 ```
 
-####place the tk-web-component inside a div with ``id="tkwidget"``
+#### place the tk-web-component inside a div with ``id="tkwidget"``
 
 ```html
 <div id="tkwidget" class="widgetOuterDiv">
     <tk-web-component apikey="your-api-key" plz="xxxxx"></tk-web-component>
 </div>
 ```
-####add your preferred width and height to this surrounding
+#### add your preferred width and height to this surrounding
 ```html
 .widgetOuterDiv {
       height: 600px;
