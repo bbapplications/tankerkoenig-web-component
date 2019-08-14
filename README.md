@@ -9,18 +9,12 @@ This "widget"-like component is stylable with css variables from outside the com
 
  ![plain widget](images/ScreenShotPlain.png)  ![syled widget](images/Screenshot.png)  
 
-## Project preperation - inspiration
+## Inspiration
 
 using vue cli > 3
 
-initial project setup was done following allong this great [post](https://medium.com/@royprins/get-started-with-vue-web-components-593b3d5b3200) on medium
+initial project setup was done following along this great [post](https://medium.com/@royprins/get-started-with-vue-web-components-593b3d5b3200) on medium
 
-
-```
-vue create tk-web-component
-npm install @vue/web-component-wrapper --save-dev
-
-```
 ## first things to do
 * get yourself an API key from here [https://creativecommons.tankerkoenig.de](https://creativecommons.tankerkoenig.de)
 
