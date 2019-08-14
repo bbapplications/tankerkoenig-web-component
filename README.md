@@ -1,5 +1,9 @@
 # tk-web-component
 
+## Purpose
+build a self contained custom web component for modern browsers using the tankerkönig API.
+This "widget" like component is stylable with css vars form outside,
+
 ## Project preparation
 
 using vue cli > 3
