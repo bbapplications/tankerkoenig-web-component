@@ -1,6 +1,6 @@
 <template>
     <div class="tkwidget-wrapper" ref="tkwidget" v-cloak>
-        <div class="tankerkoenig-info" v-if="!error">
+        <div v-if="!error">
             <tabs>
                 <tab title="E10">
                     <div :style="{height: scrollWrapperHeight}">
@@ -131,7 +131,6 @@
     import dayjs from 'dayjs';
     import vuescroll from 'vuescroll';
 
-
     axios.defaults.timeout = 15000;
 
     export default {
@@ -173,15 +172,15 @@
                     width: 0,
                     height: 0
                 },
+                updated: false,
                 API_URL: 'https://creativecommons.tankerkoenig.de/api/v4/',
                 in_stations: [],
                 out_stations: [],
                 radius: 5,
                 error: false,
                 errormsg: '',
-                widgetHeight: '100%',
                 scrollWrapperHeight: '100%',
-                updateScollHeight: null,
+                updateScrollHeight: null,
                 ops: {
                     vuescroll: {},
                     scrollPanel: {},
@@ -407,18 +406,23 @@
 
         },
         updated: function () {
-            this.setScrollHeight();
+            if(!this.updated) {
+                this.setScrollHeight();
+            }
         }
     }
 </script>
 <style>
     .tkwidget-wrapper {
-        width:  var(--widget-with,100%);
-        max-height: var(--widget-height,100%);
+        background-color: var(--bg-color, white);
+        color: var(--font-color, black);
+        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
+        font-size: var(--font-size, 16px);
         overflow-x: hidden;
         overflow-y: hidden;
-        background-color: var(--bg-color, white);
         height: 100%;
+        width:  var(--widget-with,100%);
+        max-height: var(--widget-height,100%);
     }
     .vue-tablist {
         list-style: none;
@@ -482,14 +486,6 @@
         margin-top: 20px;
     }
 
-
-    .tankerkoenig-info {
-        font-family: var(--font-family, 'Open Sans,Arial,Helvetica,sans-serif');
-        font-size: var(--font-size, 16px);
-        color: var(--font-color, black);
-        background: var(--bg-color, white);
-    }
-
     .station {
         padding: var(--station-padding, 15px);
         border-top: var(--divider, 1px solid #e2e2e2);
@@ -520,7 +516,4 @@
     .icon {
         padding-left: 5px;
     }
-
-
-
 </style>
