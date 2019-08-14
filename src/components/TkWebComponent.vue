@@ -284,13 +284,13 @@ export default {
     }
 
     if (this.in_stations.length > 0) {
-      this.getStationsByIds()
+      this.getStations('byId')
     } else if (this.plz && this.plz.length !== 0) {
       if (this.plz.length < 5 || this.plz.length > 5 || isNaN(this.plz)) {
         this.error = true
         this.errormsg = 'Postleitzahl muss 5-stellig sein - Keine gültige PLZ.'
       } else {
-        this.getStationsByPLZ()
+        this.getStations('byPLZ')
       }
     } else if (this.lat.length > 0 && this.lng.length > 0) {
       if (isNaN(this.lat) || (Number(this.lat) < 47) || (Number(this.lat) > 56)) {
@@ -308,8 +308,7 @@ export default {
       } else {
         this.radius = 5
       }
-
-      this.getStationsByCoords()
+      this.getStations('byCoords')
     } else {
       this.error = true
       this.errormsg = 'Konfigurationsdaten fehlen: stations bzw. plz eintragen. '
@@ -323,12 +322,36 @@ export default {
     }
   },
   methods: {
-    getStationsByIds() {
-      const url = 'stations/ids'
-      const params = {
-        ids: this.in_stations.join(','),
-        apikey: this.apikey
+    getStations(kind) {
+      let url
+      let params
+
+      switch (kind) {
+        case 'byId':
+          url = 'stations/ids'
+          params = {
+            ids: this.in_stations.join(','),
+            apikey: this.apikey
+          }
+          break
+        case 'byPLZ':
+          url = 'stations/postalcode'
+          params = {
+            postalcode: this.plz,
+            apikey: this.apikey
+          }
+          break
+        case 'byCoords':
+          url = 'stations/search'
+          params = {
+            apikey: this.apikey,
+            lat: this.lat,
+            lng: this.lng,
+            rad: this.rad
+          }
+          break
       }
+
       tkapi
         .get(url, { params })
         .then(response => {
@@ -346,54 +369,7 @@ export default {
           }
         })
     },
-    getStationsByPLZ() {
-      const params = {
-        postalcode: this.plz,
-        apikey: this.apikey
-      }
-      const url = 'stations/postalcode'
-      tkapi
-        .get(url, { params })
-        .then(response => {
-          this.out_stations = response.data.stations
-        })
-        .catch((e) => {
-          this.error = true
 
-          if (e.message === 'Network Error') {
-            this.errormsg = 'Network Error'
-          } else if (e.code === 'ECONNABORTED' || e.code === 'ERR_NAME_NOT_RESOLVED') {
-            this.errormsg = 'no response from server'
-          } else {
-            this.errormsg = e.response.data.message
-          }
-        })
-    },
-    getStationsByCoords() {
-      const params = {
-        apikey: this.apikey,
-        lat: this.lat,
-        lng: this.lng,
-        rad: this.rad
-      }
-      const url = 'stations/search'
-      tkapi
-        .get(url, { params })
-        .then(response => {
-          this.out_stations = response.data.stations
-        })
-        .catch((e) => {
-          this.error = true
-
-          if (e.message === 'Network Error') {
-            this.errormsg = 'Network Error'
-          } else if (e.code === 'ECONNABORTED' || e.code === 'ERR_NAME_NOT_RESOLVED') {
-            this.errormsg = 'no response from server'
-          } else {
-            this.errormsg = e.response.data.message
-          }
-        })
-    },
     hasFuel(fuels, fuelkind) {
       let hasFuel = false
       for (let i = 0; i < fuels.length; i++) {
