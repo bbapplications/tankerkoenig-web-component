@@ -3,7 +3,7 @@
 [link text itself]: http://www.reddit.com
 
 ## Purpose
-build a self contained custom web component for modern browsers using the [tankerkönig API](https://creativecommons.tankerkoenig.de/swagger/)
+build a self contained custom web component for modern browsers (no IE or Edge) using the [tankerkönig API](https://creativecommons.tankerkoenig.de/swagger/)
 
 This "widget"-like component is stylable with css variables from outside the component.
 
