@@ -67,7 +67,7 @@ import FuelStation from '../components/fuel-station'
 const tkapi = axios.create({
   baseURL: 'https://creativecommons.tankerkoenig.de/api/v4/',
   timeout: 15000
-  // headers: { 'TK-Web-Component': '1.0' } // OPTION request CORS problem
+  // headers: { 'tkwc': '1.0' } // OPTION request CORS problem
 })
 
 export default {
@@ -116,7 +116,6 @@ export default {
       error: false,
       errormsg: '',
       scrollWrapperHeight: '100%',
-      updateScrollHeight: null,
       ops: {
         vuescroll: {},
         scrollPanel: {},
@@ -248,6 +247,9 @@ export default {
 }
 </script>
 <style>
+    [v-cloak] {
+     display: none
+    }
     .tkwidget-wrapper {
         background-color: var(--bg-color, white);
         color: var(--font-color, black);
