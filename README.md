@@ -83,8 +83,6 @@ users of the component can overwrite the styles on their page with a style tag i
 ```html
 <style>
     tk-web-component {
-        --widget-with: 320px;
-        --widget-height: 500px;
         --font-family: "Arial";
         --font-size: 16px;
         --price-fontsize: 32px;
