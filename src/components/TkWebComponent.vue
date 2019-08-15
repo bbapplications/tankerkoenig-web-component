@@ -67,7 +67,6 @@ import FuelStation from '../components/fuel-station'
 const tkapi = axios.create({
   baseURL: 'https://creativecommons.tankerkoenig.de/api/v4/',
   timeout: 15000
-  // headers: { 'tkwc': '1.0' } // OPTION request CORS problem
 })
 
 export default {
@@ -181,14 +180,16 @@ export default {
           url = 'stations/ids'
           params = {
             ids: this.in_stations.join(','),
-            apikey: this.apikey
+            apikey: this.apikey,
+            tkwc: 1.0
           }
           break
         case 'byPLZ':
           url = 'stations/postalcode'
           params = {
             postalcode: this.plz,
-            apikey: this.apikey
+            apikey: this.apikey,
+            tkwc: 1.0
           }
           break
         case 'byCoords':
@@ -197,7 +198,8 @@ export default {
             apikey: this.apikey,
             lat: this.lat,
             lng: this.lng,
-            rad: this.rad
+            rad: this.rad,
+            tkwc: 1.0
           }
           break
       }
