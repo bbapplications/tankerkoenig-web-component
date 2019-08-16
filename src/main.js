@@ -13,7 +13,7 @@ if (navigator.appName == 'Microsoft Internet Explorer'
 
 if (window.customElements) {
   const WrappedElement = wrap(Vue, TkWebComponent)
-  window.customElements.define('tk-web-component', WrappedElement)
+  window.customElements.define('tankerkoenig-web-component', WrappedElement)
 } else {
   var newDiv = document.createElement('div')
   var newContent = document.createTextNode('Tankerkönig Web Komponente unterstützt keine veralteten Browser.')

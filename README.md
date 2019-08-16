@@ -1,4 +1,4 @@
-# tk-web-component
+# tankerkoenig-web-component
 
 [link text itself]: http://www.reddit.com
 
@@ -82,7 +82,7 @@ users of the component can overwrite the styles on their page with a style tag i
 
 ```html
 <style>
-    tk-web-component {
+    tankerkoenig-web-component {
         --font-family: "Arial";
         --font-size: 16px;
         --price-fontsize: 32px;
@@ -100,7 +100,7 @@ users of the component can overwrite the styles on their page with a style tag i
 #### or something like this 
 ```html
 <style>
-    tk-web-component {
+    tankerkoenig-web-component {
         --font-family: "Comic Sans MS";
         --font-size: 24px;
         --font-color: #e9e9eb;
@@ -118,7 +118,7 @@ users of the component can overwrite the styles on their page with a style tag i
 #### or this 
 ```html
 <style>
-    tk-web-component {
+    tankerkoenig-web-component {
         --font-family: "Helvetica";
         --font-size: 14px;
         --price-fontsize: 24px;
@@ -136,7 +136,7 @@ users of the component can overwrite the styles on their page with a style tag i
 #### hipster style 
 ```html
 <style>
-    tk-web-component {
+    tankerkoenig-web-component {
         --font-family: "Courier";
         --brand-color: #8bafa1;
         --font-size: 14px;
@@ -152,7 +152,7 @@ users of the component can overwrite the styles on their page with a style tag i
 
 ```html
 <style>
-    tk-web-component {
+    tankerkoenig-web-component {
         --tab-color: #584848;
         --brand-color: #f4b557;
         --font-size: 18px;
@@ -175,14 +175,14 @@ users of the component can overwrite the styles on their page with a style tag i
 #### add vuejs from the cdn and the component itself in the head section of your page
 ```html
 <script src="https://unpkg.com/vue"></script>
-<script src="./tk-web-component.min.js"></script>
+<script src="./tankerkoenig-web-component.min.js"></script>
 ```
 
-#### place the tk-web-component inside a div with ``id="tkwidget"``
+#### place the tankerkoenig-web-component inside a div with ``id="tkwidget"``
 
 ```html
 <div id="tkwidget" class="widgetOuterDiv">
-    <tk-web-component apikey="your-api-key" plz="xxxxx"></tk-web-component>
+    <tankerkoenig-web-component apikey="your-api-key" plz="xxxxx"></tankerkoenig-web-component>
 </div>
 ```
 #### add your preferred width and height to this surrounding
@@ -196,13 +196,13 @@ the component inherits the dimensions from this surrounding div
 
 #### set the web component properties
 ```html
-<tk-web-component
+<tankerkoenig-web-component
     apikey="00000000-0000-0000-0000-000000000002"
     stations="83d5ac80-4f23-4106-b054-7c7704bfcb95,944d2525-4cb4-4a53-9cbe-d80f6a9bbd3a,8eb4ceb1-abbe-4ac1-b23a-77b890fa1d89,508b5f83-1d68-4695-9e4c-5bfeac7e13a9"
     plz="88400"
     lat="48.8"
     lng="9.24"
-    rad="2"></tk-web-component>
+    rad="2"></tankerkoenig-web-component>
 ```
 
 * apikey [required]
