@@ -215,6 +215,7 @@ The apikey property is always required!
 You can either add 
 * an array with station ids, 
 * or add your postalcode 
-* or use longitude, latitude and radius 
+* or use longitude, latitude and radius
+
 
 to configure the stations search. If you provide all of them - stations prop wins over plz wins over lat,lng,rad.
