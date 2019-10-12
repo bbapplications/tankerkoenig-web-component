@@ -5,7 +5,7 @@
         <tab title="E10">
           <div :style="{height: scrollWrapperHeight}">
             <vue-scroll :ops="ops">
-              <div v-for="station in out_stations" :key="station.id">
+              <div v-for="station in out_stations" :key="station.id" @click="affiliatelink(station.id)">
                 <div v-if="hasFuel(station.fuels, 'Super E10')" class="station">
                   <fuel-station :station="station" :fueltype="'Super E10'" />
                 </div>
@@ -16,7 +16,7 @@
         <tab title="Super">
           <div :style="{height: scrollWrapperHeight}">
             <vue-scroll :ops="ops">
-              <div v-for="station in out_stations" :key="station.id">
+              <div v-for="station in out_stations" :key="station.id" @click="affiliatelink(station.id)">
                 <div v-if="hasFuel(station.fuels, 'Super E5')" class="station row">
                   <fuel-station :station="station" :fueltype="'Super E5'" />
                 </div>
@@ -27,7 +27,7 @@
         <tab title="Diesel">
           <div :style="{height: scrollWrapperHeight}">
             <vue-scroll :ops="ops">
-              <div v-for="station in out_stations" :key="station.id">
+              <div v-for="station in out_stations" :key="station.id" @click="affiliatelink(station.id)">
                 <div v-if="hasFuel(station.fuels, 'Diesel')" class="station row">
                   <fuel-station :station="station" :fueltype="'Diesel'" />
                 </div>
@@ -244,6 +244,10 @@ export default {
           this.updated = true
         })
       }
+    },
+    affiliatelink(stationid) {
+      const href= `https://tankerkoenig.de/home/station/${stationid}`
+      window.open(href, '_blank')
     }
   }
 }
@@ -298,6 +302,7 @@ export default {
     .station {
         padding: var(--station-padding, 15px);
         border-top: var(--divider, 1px solid #e2e2e2);
+        cursor: pointer;
     }
     .tkcredentials {
         color: #34495D;
