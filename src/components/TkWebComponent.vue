@@ -246,7 +246,7 @@ export default {
       }
     },
     affiliatelink(stationid) {
-      const href= `https://tankerkoenig.de/home/station/${stationid}`
+      const href = `https://tankerkoenig.de/home/station/${stationid}`
       window.open(href, '_blank')
     }
   }
